@@ -7,7 +7,7 @@
 
 int fd;
 
-void remote_shell_connect(char * dest_ip){
+int remote_shell_connect(char * dest_ip){
     fd = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in sa_dst;
