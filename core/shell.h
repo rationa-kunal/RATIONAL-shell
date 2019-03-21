@@ -26,15 +26,7 @@ void shell_loop(){
         // add it to history
         add_cmd_to_index(line);
 
-        // fork and execute command in child
-        // wait for child
-        int pid;
-        pid = fork();
-        if (pid == 0) { // parent process
-            if (execvp(argv[0], argv) == -1) perror("lsh");
-        } else { // child process
-            wait(&status);
-        }
-
+        // execute command
+        status = execute_cmd(argv);
     }
 }
