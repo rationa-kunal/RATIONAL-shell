@@ -1,13 +1,3 @@
-#include <string.h>
-#include <sys/wait.h>
-#include <unistd.h>
-
-#include "color.h"
-#include "parsing.h"
-#include "history.h"
-#include "remote_shell.h"
-#include "custom_cmd.h"
-
 #define MAX_CMD 1024
 #define MAX_ARGS 32
 
