@@ -25,10 +25,9 @@ void shell_loop(){
         // get line from cmd line
         char *line;
         fgets(cmd_line, sizeof(cmd_line), stdin);
-        // parse it with ' ' as delimeter
+        // seperate line from '\n'
         line = strtok(cmd_line, "\n");
-
-        // create tokens of arg and append it to an array
+        // parse line and store args in argv
         parse_with_space(line, argv);
 
         // check if command is custom command
