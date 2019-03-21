@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 #include "color.h"
+#include "parsing.h"
 #include "history.h"
 #include "remote_shell.h"
 #include "custom_cmd.h"
@@ -28,15 +29,7 @@ void shell_loop(){
         line = strtok(cmd_line, "\n");
 
         // create tokens of arg and append it to an array
-        int idx = 0;
-        char *token;
-        token = strtok(line, &delim);
-        argv[idx] = token;
-        while( token != NULL ) {
-            idx++;
-            token = strtok(NULL, &delim);
-            argv[idx] = token;
-        }
+        parse_with_space(line, argv);
 
         // check if command is custom command
         if(execute_custom_command(argv[0], argv)!=ERR) continue;
