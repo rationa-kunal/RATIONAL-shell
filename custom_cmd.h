@@ -6,18 +6,19 @@ char *starts = "STARTS";
 char *stops = "STOPS";
 
 #define ERR -1
+#define SUCC 1
 int fd;
 
 int execute_if_custom_command(char *cmd, char *argv[]){
+    // if else if statement to search for right cmd to execute
+    // finally else if right cmd not found the return ERR
+
     if(strcmp(cmd, up)==0){
         get_cmd_frm_history(-1);
-        return 1;
     } else if(strcmp(cmd, down)==0){
         get_cmd_frm_history(1);
-        return 1;
     } else if(strcmp(cmd, all)==0){
         print_all();
-        return 1;
     } else if (strcmp(cmd, starts)==0){
         danger("connecting\n");
         int pid, status;
@@ -32,5 +33,9 @@ int execute_if_custom_command(char *cmd, char *argv[]){
         remote_shell_stop(fd);
     }
 
-    return ERR;
+    else{
+        return ERR;
+    }
+
+    return SUCC;
 }
