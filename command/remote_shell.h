@@ -1,14 +1,5 @@
-#include <assert.h>
-#include <stdint.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-
-int fd;
-
 int remote_shell_connect(char * dest_ip){
-    fd = socket(AF_INET, SOCK_STREAM, 0);
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in sa_dst;
     memset(&sa_dst, 0, sizeof(struct sockaddr_in));

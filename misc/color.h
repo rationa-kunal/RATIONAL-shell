@@ -1,4 +1,3 @@
-#include <stdio.h>
 
 void bold(char *s) {
   printf("\033[1;33m%s\033[0m", s);

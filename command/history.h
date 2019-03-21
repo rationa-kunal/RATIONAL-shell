@@ -1,4 +1,3 @@
-#include <stdlib.h>
 
 #define MAX_HISTORY 256
 
