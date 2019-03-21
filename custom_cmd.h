@@ -8,7 +8,7 @@ char *stops = "STOPS";
 #define ERR -1
 int fd;
 
-int execute_custom_command(char *cmd, char *argv[]){
+int execute_if_custom_command(char *cmd, char *argv[]){
     if(strcmp(cmd, up)==0){
         get_cmd_frm_history(-1);
         return 1;

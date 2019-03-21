@@ -31,7 +31,7 @@ void shell_loop(){
         parse_with_space(line, argv);
 
         // check if command is custom command
-        if(execute_custom_command(argv[0], argv)!=ERR) continue;
+        if(execute_if_custom_command(argv[0], argv)!=ERR) continue;
         // if not then execute it
         // add it to history
         add_cmd_to_index(line);
