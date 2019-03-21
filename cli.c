@@ -2,7 +2,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include "color.h"
+#include "misc/color.h"
 #include "parsing.h"
 #include "history.h"
 #include "remote_shell.h"
