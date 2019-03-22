@@ -8,8 +8,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <fnmatch.h>
 
 #include "misc/color.h"
+#include "core/wildcard.h"
 #include "core/parsing.h"
 #include "core/exec.h"
 #include "command/history.h"
