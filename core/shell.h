@@ -10,8 +10,8 @@ void shell_loop(){
     int status = 0;
 
     while(status==0){
+        
         bold("rational > ");
-
         // get line from cmd line
         char *line;
         fgets(cmd_line, sizeof(cmd_line), stdin);
@@ -20,7 +20,14 @@ void shell_loop(){
         // parse line and store args in argv
         struct queue *seq_q = parse_with_semicolan(line);
 
+        int pid;
+        pid = fork();
+        if(pid==0){
+            status = execute_seq_q(seq_q);    
+        }else {
+            wait(&status);
+        }
         // execute command
-        status = execute_seq_q(seq_q);
+        //status = execute_seq_q(seq_q);
     }
 }

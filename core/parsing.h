@@ -12,11 +12,11 @@ struct command * parse_with_space(char *line){
     char *token;
     char delim = ' ';
     token = strtok(line, &delim);
-    printf("token %s\n", token);
+    // printf("token %s\n", token);
     new_cmd->argv[idx] = token;
     while( (token=strtok(NULL, &delim)) != NULL ) {
         idx++;
-        printf("token %s\n", token);
+        //printf("token %s\n", token);
         //token = strtok(NULL, &delim);
         // check for wild card
         if(strcmp(token, wild_card_prefix)==0 ) {
@@ -35,7 +35,30 @@ struct command * parse_with_space(char *line){
     return new_cmd;
 }
 
-struct queue * parse_with_semicolan(char *line){
+struct queue *parse_with_pipe(char *line){
+    // parse line with ' ' as delimeter
+    // append tokens in argv
+
+    // initialize seq queue
+    // all sequential commands will be here
+    struct queue *pipe_q = q_init();
+
+    // parsing line with semicolan
+    char *seq_saveptr;
+    char *pipe_subcmd;
+    pipe_subcmd=strtok_r(line, pipe_s, &seq_saveptr);
+    while(pipe_subcmd!=NULL){
+        
+        // printf("semic %s\n", pipe_subcmd);
+        enqueue(pipe_q, parse_with_space(pipe_subcmd)) ;   
+        pipe_subcmd=strtok_r(NULL, pipe_s, &seq_saveptr);
+
+    }
+
+    return pipe_q;
+}
+
+struct queue *parse_with_semicolan(char *line){
     // parse line with ' ' as delimeter
     // append tokens in argv
 
@@ -49,8 +72,8 @@ struct queue * parse_with_semicolan(char *line){
     seq_subcmd=strtok_r(line, semicolan, &seq_saveptr);
     while(seq_subcmd!=NULL){
         
-        printf("semic %s\n", seq_subcmd);
-        enqueue(seq_q, parse_with_space(seq_subcmd)) ;   
+        // printf("semic %s\n", seq_subcmd);
+        enqueue(seq_q, parse_with_pipe(seq_subcmd)) ;   
         seq_subcmd=strtok_r(NULL, semicolan, &seq_saveptr);
 
     }

@@ -27,19 +27,19 @@ struct queue *q_init(){
     q->tail = NULL;
 }
 
-void enqueue(struct queue *q, struct command *cmd){
+void enqueue(struct queue *q, void *entry){
     if(q->head==NULL){
-        q->head = new_node(cmd);
+        q->head = new_node(entry);
         q->tail = q->head;
         return;
     }
-    struct node *n = new_node(cmd);
+    struct node *n = new_node(entry);
     n->nxt = q->head;
     q->head->prev = n;
     q->head = n;
 }
 
-struct command * dequeue(struct queue * q){
+void * dequeue(struct queue * q){
     struct node *t = q->tail;
     if(t==NULL){
         return NULL;
