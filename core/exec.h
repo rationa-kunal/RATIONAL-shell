@@ -5,6 +5,7 @@ int execute_cmd(struct command *cmd, int in, int out){
     int pid;
     pid = fork();
     if (pid == 0) {
+        if(execute_if_custom_command(cmd)==SUCC) return 0;
         // printf("here %s\n", cmd->argv[0]);
         if (in != 0){
             // stdin -> in then close(in) now stdin points to in
@@ -42,9 +43,7 @@ int execute_pipe_q(struct queue *pipe_q){
         // printf("count %d\n", count++);
     }
 
-    if(in!=0) dup2(in, 0);
-
-    return execute_cmd(cmd, in, STDOUT_FILENO);
+    int status = execute_cmd(cmd, in, STDOUT_FILENO);
 }
 
 int execute_seq_q(struct queue *seq_q){

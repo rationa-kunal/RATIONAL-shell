@@ -25,6 +25,7 @@ int execute_if_custom_command(struct command *cmd_l){
         int pid, status;
         pid = fork();
         if (pid == 0) {
+            printf("here\n");
             fd = remote_shell_connect(cmd_l->argv[1]);
         } else {
             wait(&status);
