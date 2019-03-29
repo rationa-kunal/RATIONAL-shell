@@ -9,9 +9,10 @@ char *stops = "STOPS";
 #define SUCC 1
 int fd;
 
-int execute_if_custom_command(char *cmd, char *argv[]){
+int execute_if_custom_command(struct command *cmd_l){
     // if else if statement to search for right cmd to execute
     // finally else if right cmd not found the return ERR
+    char *cmd = cmd_l->argv[0];
 
     if(strcmp(cmd, up)==0){
         get_cmd_frm_history(-1);
@@ -24,7 +25,8 @@ int execute_if_custom_command(char *cmd, char *argv[]){
         int pid, status;
         pid = fork();
         if (pid == 0) {
-            fd = remote_shell_connect(argv[1]);
+            printf("here\n");
+            fd = remote_shell_connect(cmd_l->argv[1]);
         } else {
             wait(&status);
         }
