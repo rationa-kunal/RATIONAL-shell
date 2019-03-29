@@ -1,19 +1,20 @@
+
 int get_wildcard_matche(char *pattern, char *argv[], int *idx){
 
+    // idx is current index of argv
     int i  = *idx;
+
     DIR *dir;
     struct dirent *f;     
     dir = opendir("./");
-    printf("ptrn %s\n", pattern);
+    
     if (dir != NULL){
         while (f = readdir (dir)){
-            // printf("%s\t", f->d_name);
             // filename f->d_name
             if(fnmatch(pattern, f->d_name, 0)==0){
-                printf("%s\t", f->d_name);
+                // file name matched with pattern
                 i++;
                 argv[i] = f->d_name;
-                printf("%s\t", f->d_name);
             }
         }
 

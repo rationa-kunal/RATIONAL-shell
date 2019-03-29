@@ -26,5 +26,6 @@
 #include "core/shell.h"
 
 void main(){
+    // THE ULTIMATE LOOP
     shell_loop();
 }
