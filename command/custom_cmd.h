@@ -3,6 +3,7 @@ char *up = "HUP";
 char *down = "HDOWN";
 char *all = "HALL";
 char *starts = "STARTS";
+char *connects = "CONNECTS";
 char *stops = "STOPS";
 
 #define ERR -1
@@ -14,13 +15,22 @@ int execute_if_custom_command(struct command *cmd_l){
     // finally else if right cmd not found the return ERR
     char *cmd = cmd_l->argv[0];
 
-    if (strcmp(cmd, starts)==0){
+    if (strcmp(cmd, connects)==0){
         danger("connecting\n");
         int pid, status;
         pid = fork();
         if (pid == 0) {
-            printf("here\n");
             fd = remote_shell_connect(cmd_l->argv[1]);
+        } else {
+            wait(&status);
+        }
+    } else if(strcmp(cmd, starts)==0) {
+        danger("starting server\n");
+        int pid, status;
+        pid = fork();
+        if (pid == 0) {
+            danger("starting server\n");
+            remote_shell_serve();
         } else {
             wait(&status);
         }
