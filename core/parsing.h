@@ -12,6 +12,9 @@ struct command * parse_with_space(char *line){
     char *token;
     token = strtok(line, space_s);
     new_cmd->argv[idx] = token;
+
+    int ret = execute_history_command(token, line);
+    if(ret==SUCC) return NULL;
     
     while( (token=strtok(NULL, space_s)) != NULL ) {
         idx++;
@@ -40,15 +43,22 @@ struct queue *parse_with_pipe(char *line){
 
     char *seq_saveptr;
     char *pipe_subcmd;
+    struct command *cmd;
     pipe_subcmd=strtok_r(line, pipe_s, &seq_saveptr);
     while(pipe_subcmd!=NULL){
         
         // enque the command resulted from parsing
-        enqueue(pipe_q, parse_with_space(pipe_subcmd)) ;   
+        cmd = parse_with_space(pipe_subcmd);
+        if(cmd!=NULL) enqueue(pipe_q, cmd) ;   
         pipe_subcmd=strtok_r(NULL, pipe_s, &seq_saveptr);
 
     }
 
+    if(is_empty(pipe_q)){
+        free(pipe_q);
+        return NULL;
+    }
+    
     return pipe_q;
 }
 
@@ -69,6 +79,10 @@ struct queue *parse_with_semicolan(char *line){
 
     }
 
+    if(is_empty(seq_q)){
+        free(seq_q);
+        return NULL;
+    }
 
     return seq_q;
 }

@@ -23,6 +23,8 @@ void shell_loop(){
         // entries from pipe_1 will execute in piped manner
         struct queue *seq_q = parse_with_semicolan(line);
 
+        if(seq_q == NULL) continue;
+
         // execute the seq q
         status = execute_seq_q(seq_q); 
     }

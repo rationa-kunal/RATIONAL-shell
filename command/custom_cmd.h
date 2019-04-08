@@ -14,13 +14,7 @@ int execute_if_custom_command(struct command *cmd_l){
     // finally else if right cmd not found the return ERR
     char *cmd = cmd_l->argv[0];
 
-    if(strcmp(cmd, up)==0){
-        get_cmd_frm_history(-1);
-    } else if(strcmp(cmd, down)==0){
-        get_cmd_frm_history(1);
-    } else if(strcmp(cmd, all)==0){
-        print_all();
-    } else if (strcmp(cmd, starts)==0){
+    if (strcmp(cmd, starts)==0){
         danger("connecting\n");
         int pid, status;
         pid = fork();
@@ -36,6 +30,23 @@ int execute_if_custom_command(struct command *cmd_l){
     }
 
     else{
+        return ERR;
+    }
+
+    return SUCC;
+}
+
+int execute_history_command(char *cmd_start, char *cmd){
+    if(strcmp(cmd_start, up)==0){
+        get_cmd_frm_history(-1);
+    } else if(strcmp(cmd_start, down)==0){
+        get_cmd_frm_history(1);
+    } else if(strcmp(cmd_start, all)==0){
+        print_all();
+    }
+
+    else{
+        add_cmd_to_index(cmd);
         return ERR;
     }
 

@@ -12,7 +12,7 @@ void get_cmd_frm_history(int step){
         danger("NO HISTORY\n");
         return;
     }else if(_past_cmd == present_cmd){
-        danger("INVALID");
+        danger("INVALID\n");
         return;
     }
     past_cmd += step;
